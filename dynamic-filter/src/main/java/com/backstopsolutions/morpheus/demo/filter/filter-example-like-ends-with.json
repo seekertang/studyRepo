@@ -1,0 +1,64 @@
+{
+  "_comment": [
+    "Scenario: LIKE / ENDS_WITH string matching demo",
+    "  Query Strategy records matching these conditions:",
+    "  1. name LIKE '%Fund%' (contains the keyword Fund)",
+    "  2. ownerName ENDS_WITH 'Liu' OR ownerName ENDS_WITH 'Wang' (OR combination of ENDS_WITH)",
+    "  Sort by name ascending, page 1 with 20 rows"
+  ],
+  "filterQuery": {
+    "entity": "StrategyEntity",
+    "filter": {
+      "type": "GROUP",
+      "logic": "AND",
+      "children": [
+        {
+          "_comment": "Condition 1: name LIKE '%Fund%'",
+          "type": "CONDITION",
+          "field": "name",
+          "operator": "LIKE",
+          "value": {
+            "kind": "LITERAL",
+            "data": "%Fund%"
+          }
+        },
+        {
+          "_comment": "Condition 2: ownerName ENDS_WITH 'Liu' OR ownerName ENDS_WITH 'Wang'",
+          "type": "GROUP",
+          "logic": "OR",
+          "children": [
+            {
+              "type": "CONDITION",
+              "field": "ownerName",
+              "operator": "ENDS_WITH",
+              "value": {
+                "kind": "LITERAL",
+                "data": "Liu"
+              }
+            },
+            {
+              "type": "CONDITION",
+              "field": "ownerName",
+              "operator": "ENDS_WITH",
+              "value": {
+                "kind": "LITERAL",
+                "data": "Wang"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "sort": [
+      {
+        "field": "name",
+        "direction": "ASC"
+      }
+    ],
+    "page": {
+      "index": 1,
+      "size": 20
+    }
+  }
+}
+

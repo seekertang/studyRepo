@@ -1,0 +1,59 @@
+{
+  "_comment": [
+    "Scenario: positive EXISTS demo (Strategy records with external meetings)",
+    "  Query Strategy records matching these conditions:",
+    "  1. EXISTS: a related Meeting exists and it uses a template that does not start with Internal",
+    "     That is, meetingTemplate.name NOT STARTS_WITH 'Internal'",
+    "  2. status = 'ACTIVE'",
+    "  Sort by updatedAt ascending, page 1 with 20 rows"
+  ],
+  "filterQuery": {
+    "entity": "StrategyEntity",
+    "filter": {
+      "type": "GROUP",
+      "logic": "AND",
+      "children": [
+        {
+          "_comment": "Condition 1: status = 'ACTIVE'",
+          "type": "CONDITION",
+          "field": "status",
+          "operator": "EQ",
+          "value": {
+            "kind": "LITERAL",
+            "data": "ACTIVE"
+          }
+        },
+        {
+          "_comment": "Condition 2: EXISTS Meeting where the template name STARTS_WITH 'External'",
+          "type": "EXISTS",
+          "not": false,
+          "subEntity": "MeetingEntity",
+          "correlation": {
+            "parentField": "id",
+            "subField": "strategyId"
+          },
+          "subFilter": {
+            "type": "CONDITION",
+            "field": "meetingTemplate.name",
+            "operator": "STARTS_WITH",
+            "value": {
+              "kind": "LITERAL",
+              "data": "External"
+            }
+          }
+        }
+      ]
+    },
+    "sort": [
+      {
+        "field": "updatedAt",
+        "direction": "ASC"
+      }
+    ],
+    "page": {
+      "index": 1,
+      "size": 20
+    }
+  }
+}
+

@@ -1,0 +1,56 @@
+{
+  "_comment": [
+    "Scenario: GT + IS_NULL / IS_NOT_NULL demo",
+    "  Query Strategy records matching these conditions:",
+    "  1. aum > 2000000 (GT operator)",
+    "  2. ownerName IS_NOT_NULL (has an owner)",
+    "  3. status NE 'CLOSED' (exclude closed records)",
+    "  Sort by aum descending, page 1 with 10 rows"
+  ],
+  "filterQuery": {
+    "entity": "StrategyEntity",
+    "filter": {
+      "type": "GROUP",
+      "logic": "AND",
+      "children": [
+        {
+          "_comment": "Condition 1: aum > 2000000",
+          "type": "CONDITION",
+          "field": "aum",
+          "operator": "GT",
+          "value": {
+            "kind": "LITERAL",
+            "data": 2000000
+          }
+        },
+        {
+          "_comment": "Condition 2: ownerName IS_NOT_NULL",
+          "type": "CONDITION",
+          "field": "ownerName",
+          "operator": "IS_NOT_NULL"
+        },
+        {
+          "_comment": "Condition 3: status NE 'CLOSED'",
+          "type": "CONDITION",
+          "field": "status",
+          "operator": "NE",
+          "value": {
+            "kind": "LITERAL",
+            "data": "CLOSED"
+          }
+        }
+      ]
+    },
+    "sort": [
+      {
+        "field": "aum",
+        "direction": "DESC"
+      }
+    ],
+    "page": {
+      "index": 1,
+      "size": 10
+    }
+  }
+}
+

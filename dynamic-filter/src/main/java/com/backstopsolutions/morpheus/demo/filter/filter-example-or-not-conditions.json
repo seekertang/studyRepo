@@ -1,0 +1,113 @@
+{
+  "_comment": [
+    "Scenario: query Strategy records matching these conditions:",
+    "  1. status is ACTIVE or INACTIVE (OR group)",
+    "  2. aum is between 1000000 and 9999999 (BETWEEN)",
+    "  3. NOT EXISTS: no Meeting matches any of these conditions (EXISTS + NOT + OR inside the subquery)",
+    "       - meetingTemplate.name starts with 'Internal'",
+    "       - createdAt is earlier than 2025-01-01 (legacy meeting)",
+    "Sort by updatedAt descending, page 1 with 20 rows"
+  ],
+  "filterQuery": {
+    "entity": "StrategyEntity",
+    "filter": {
+      "type": "GROUP",
+      "logic": "AND",
+      "children": [
+        {
+          "_comment": "Condition 1: status = ACTIVE OR status = INACTIVE",
+          "type": "GROUP",
+          "logic": "OR",
+          "children": [
+            {
+              "type": "CONDITION",
+              "field": "status",
+              "operator": "EQ",
+              "value": {
+                "kind": "LITERAL",
+                "data": "ACTIVE"
+              }
+            },
+            {
+              "type": "CONDITION",
+              "field": "status",
+              "operator": "EQ",
+              "value": {
+                "kind": "LITERAL",
+                "data": "INACTIVE"
+              }
+            }
+          ]
+        },
+        {
+          "_comment": "Condition 2: aum BETWEEN 1000000 AND 9999999",
+          "type": "CONDITION",
+          "field": "aum",
+          "operator": "BETWEEN",
+          "value": {
+            "kind": "LITERAL",
+            "data": [1000000, 9999999]
+          }
+        },
+        {
+          "_comment": "Condition 3: NOT EXISTS subquery using OR inside the subquery",
+          "type": "EXISTS",
+          "not": true,
+          "subEntity": "MeetingEntity",
+          "correlation": {
+            "parentField": "id",
+            "subField": "strategyId"
+          },
+          "subFilter": {
+            "_comment": "Subquery filter: meetingTemplate.name STARTS_WITH 'Internal' OR createdAt < 2025-01-01",
+            "type": "GROUP",
+            "logic": "OR",
+            "children": [
+              {
+                "type": "CONDITION",
+                "field": "meetingTemplate.name",
+                "operator": "STARTS_WITH",
+                "value": {
+                  "kind": "LITERAL",
+                  "data": "Internal"
+                }
+              },
+              {
+                "type": "CONDITION",
+                "field": "createdAt",
+                "operator": "LT",
+                "value": {
+                  "kind": "LITERAL",
+                  "data": "2025-01-01T00:00:00"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "_comment": "Condition 4: negate a single condition so ownerName is not null",
+          "type": "GROUP",
+          "logic": "NOT",
+          "children": [
+            {
+              "type": "CONDITION",
+              "field": "ownerName",
+              "operator": "IS_NULL"
+            }
+          ]
+        }
+      ]
+    },
+    "sort": [
+      {
+        "field": "updatedAt",
+        "direction": "DESC"
+      }
+    ],
+    "page": {
+      "index": 1,
+      "size": 20
+    }
+  }
+}
+

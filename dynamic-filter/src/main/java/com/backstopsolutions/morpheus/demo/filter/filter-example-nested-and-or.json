@@ -1,0 +1,80 @@
+{
+  "_comment": [
+    "Scenario: deeply nested AND / OR logic demo",
+    "  Query logic (pseudocode):",
+    "  (status = 'ACTIVE' AND aum >= 3000000)",
+    "  OR",
+    "  (status = 'INACTIVE' AND ownerName STARTS_WITH 'Bob')",
+    "  Sort by aum ascending, page 1 with 20 rows"
+  ],
+  "filterQuery": {
+    "entity": "StrategyEntity",
+    "filter": {
+      "type": "GROUP",
+      "logic": "OR",
+      "children": [
+        {
+          "_comment": "Branch A: ACTIVE and aum >= 3000000",
+          "type": "GROUP",
+          "logic": "AND",
+          "children": [
+            {
+              "type": "CONDITION",
+              "field": "status",
+              "operator": "EQ",
+              "value": {
+                "kind": "LITERAL",
+                "data": "ACTIVE"
+              }
+            },
+            {
+              "type": "CONDITION",
+              "field": "aum",
+              "operator": "GTE",
+              "value": {
+                "kind": "LITERAL",
+                "data": 3000000
+              }
+            }
+          ]
+        },
+        {
+          "_comment": "Branch B: INACTIVE and ownerName STARTS_WITH 'Bob'",
+          "type": "GROUP",
+          "logic": "AND",
+          "children": [
+            {
+              "type": "CONDITION",
+              "field": "status",
+              "operator": "EQ",
+              "value": {
+                "kind": "LITERAL",
+                "data": "INACTIVE"
+              }
+            },
+            {
+              "type": "CONDITION",
+              "field": "ownerName",
+              "operator": "STARTS_WITH",
+              "value": {
+                "kind": "LITERAL",
+                "data": "Bob"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "sort": [
+      {
+        "field": "aum",
+        "direction": "ASC"
+      }
+    ],
+    "page": {
+      "index": 1,
+      "size": 20
+    }
+  }
+}
+

@@ -1,0 +1,83 @@
+{
+  "_comment": [
+    "Scenario: EXISTS + manual key join demo (join and correlation are handled separately)",
+    "  Query Strategy records matching these conditions:",
+    "  1. status = 'ACTIVE'",
+    "  2. EXISTS: a related Meeting exists (meeting.strategyId = strategy.id)",
+    "  3. Use a manual join inside the subquery: meeting.partnerId = meetingPartner.id (alias: mp)",
+    "  4. And mp.name STARTS_WITH 'External' and meetingTemplate.name STARTS_WITH 'External'",
+    "  Sort by updatedAt ascending, page 1 with 20 rows"
+  ],
+  "filterQuery": {
+    "entity": "StrategyEntity",
+    "filter": {
+      "type": "GROUP",
+      "logic": "AND",
+      "children": [
+        {
+          "_comment": "Condition 1: status = 'ACTIVE'",
+          "type": "CONDITION",
+          "field": "status",
+          "operator": "EQ",
+          "value": {
+            "kind": "LITERAL",
+            "data": "ACTIVE"
+          }
+        },
+        {
+          "_comment": "Condition 2: EXISTS subquery + manual key join to MeetingPartner",
+          "type": "EXISTS",
+          "not": false,
+          "subEntity": "MeetingEntity",
+          "correlation": {
+            "parentField": "id",
+            "subField": "strategyId"
+          },
+          "joins": [
+            {
+              "alias": "mp",
+              "targetEntity": "MeetingPartnerEntity",
+              "sourceField": "partnerId",
+              "targetField": "id",
+              "joinType": "INNER"
+            }
+          ],
+          "subFilter": {
+            "type": "GROUP",
+            "logic": "AND",
+            "children": [
+              {
+                "type": "CONDITION",
+                "field": "mp.name",
+                "operator": "STARTS_WITH",
+                "value": {
+                  "kind": "LITERAL",
+                  "data": "External"
+                }
+              },
+              {
+                "type": "CONDITION",
+                "field": "meetingTemplate.name",
+                "operator": "STARTS_WITH",
+                "value": {
+                  "kind": "LITERAL",
+                  "data": "External"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "sort": [
+      {
+        "field": "updatedAt",
+        "direction": "ASC"
+      }
+    ],
+    "page": {
+      "index": 1,
+      "size": 20
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "_comment": [
+    "Scenario: IN / NOT_IN operator demo",
+    "  Query Strategy records matching these conditions:",
+    "  1. status IN ('ACTIVE', 'INACTIVE') (IN operator)",
+    "  2. id NOT_IN (3, 4, 5) (exclude specific records)",
+    "  Sort by id ascending, page 1 with 20 rows"
+  ],
+  "filterQuery": {
+    "entity": "StrategyEntity",
+    "filter": {
+      "type": "GROUP",
+      "logic": "AND",
+      "children": [
+        {
+          "_comment": "Condition 1: status IN ('ACTIVE', 'INACTIVE')",
+          "type": "CONDITION",
+          "field": "status",
+          "operator": "IN",
+          "value": {
+            "kind": "LITERAL",
+            "data": ["ACTIVE", "INACTIVE"]
+          }
+        },
+        {
+          "_comment": "Condition 2: id NOT IN (3, 4, 5)",
+          "type": "CONDITION",
+          "field": "id",
+          "operator": "NOT_IN",
+          "value": {
+            "kind": "LITERAL",
+            "data": [3, 4, 5]
+          }
+        }
+      ]
+    },
+    "sort": [
+      {
+        "field": "id",
+        "direction": "ASC"
+      }
+    ],
+    "page": {
+      "index": 1,
+      "size": 20
+    }
+  }
+}
+

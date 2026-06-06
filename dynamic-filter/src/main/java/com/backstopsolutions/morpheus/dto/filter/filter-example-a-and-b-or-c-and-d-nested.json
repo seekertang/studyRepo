@@ -1,0 +1,52 @@
+{
+  "filterQuery": {
+    "filter": {
+      "type": "GROUP",
+      "logic": "AND",
+      "children": [
+        {
+          "type": "CONDITION",
+          "field": "fieldA",
+          "operator": "EQ",
+          "value": {
+            "kind": "LITERAL",
+            "data": "A"
+          }
+        },
+        {
+          "type": "GROUP",
+          "logic": "OR",
+          "children": [
+            {
+              "type": "CONDITION",
+              "field": "fieldB",
+              "operator": "EQ",
+              "value": {
+                "kind": "LITERAL",
+                "data": "B"
+              }
+            },
+            {
+              "type": "CONDITION",
+              "field": "fieldC",
+              "operator": "EQ",
+              "value": {
+                "kind": "LITERAL",
+                "data": "C"
+              }
+            }
+          ]
+        },
+        {
+          "type": "CONDITION",
+          "field": "fieldD",
+          "operator": "EQ",
+          "value": {
+            "kind": "LITERAL",
+            "data": "D"
+          }
+        }
+      ]
+    }
+  }
+}
