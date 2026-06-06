@@ -1,7 +1,7 @@
-package com.backstopsolutions.morpheus.demo.filter;
+package com.ethansolutions.morpheus.demo.filter;
 
-import com.backstopsolutions.morpheus.demo.filter.entity.StrategyEntity;
-import com.backstopsolutions.morpheus.demo.filter.service.StrategyFilterQueryService;
+import com.ethansolutions.morpheus.demo.filter.entity.StrategyEntity;
+import com.ethansolutions.morpheus.demo.filter.service.StrategyFilterQueryService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

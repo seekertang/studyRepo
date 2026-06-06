@@ -1,4 +1,4 @@
-package com.backstopsolutions.morpheus.dto.filter;
+package com.ethansolutions.morpheus.dto.filter;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -7,7 +7,7 @@ class FilterQueryJsonParserTests {
 
     @Test
     void shouldParseAAndBOrCAndDFile() {
-        String filePath = "src/main/java/com/backstopsolutions/morpheus/dto/filter/filter-example-a-and-b-or-c-and-d.json";
+        String filePath = "src/main/java/com/ethansolutions/morpheus/dto/filter/filter-example-a-and-b-or-c-and-d.json";
 
         FilterQueryDto dto = FilterQueryJsonParser.parseFile(filePath);
 
@@ -20,7 +20,7 @@ class FilterQueryJsonParserTests {
 
     @Test
     void shouldParseNestedFile() {
-        String filePath = "src/main/java/com/backstopsolutions/morpheus/dto/filter/filter-example-a-and-b-or-c-and-d-nested.json";
+        String filePath = "src/main/java/com/ethansolutions/morpheus/dto/filter/filter-example-a-and-b-or-c-and-d-nested.json";
 
         FilterQueryDto dto = FilterQueryJsonParser.parseFile(filePath);
 

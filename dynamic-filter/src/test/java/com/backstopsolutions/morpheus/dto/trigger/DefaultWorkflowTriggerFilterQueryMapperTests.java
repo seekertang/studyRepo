@@ -1,14 +1,14 @@
-package com.backstopsolutions.morpheus.dto.trigger;
+package com.ethansolutions.morpheus.dto.trigger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.backstopsolutions.morpheus.dto.filter.FilterLogicType;
-import com.backstopsolutions.morpheus.dto.filter.FilterNodeDto;
-import com.backstopsolutions.morpheus.dto.filter.FilterNodeType;
-import com.backstopsolutions.morpheus.dto.filter.FilterOperator;
-import com.backstopsolutions.morpheus.dto.filter.FilterQueryDto;
+import com.ethansolutions.morpheus.dto.filter.FilterLogicType;
+import com.ethansolutions.morpheus.dto.filter.FilterNodeDto;
+import com.ethansolutions.morpheus.dto.filter.FilterNodeType;
+import com.ethansolutions.morpheus.dto.filter.FilterOperator;
+import com.ethansolutions.morpheus.dto.filter.FilterQueryDto;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;

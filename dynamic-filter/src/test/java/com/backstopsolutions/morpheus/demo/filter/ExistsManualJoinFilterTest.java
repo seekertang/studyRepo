@@ -1,7 +1,7 @@
-package com.backstopsolutions.morpheus.demo.filter;
+package com.ethansolutions.morpheus.demo.filter;
 
-import com.backstopsolutions.morpheus.demo.filter.entity.StrategyEntity;
-import com.backstopsolutions.morpheus.demo.filter.service.StrategyFilterQueryService;
+import com.ethansolutions.morpheus.demo.filter.entity.StrategyEntity;
+import com.ethansolutions.morpheus.demo.filter.service.StrategyFilterQueryService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import java.util.List;
 class ExistsManualJoinFilterTest {
 
     private static final String EXISTS_MANUAL_JOIN_EXAMPLE =
-        "src/main/java/com/backstopsolutions/morpheus/demo/filter/filter-example-exists-manual-join.json";
+        "src/main/java/com/ethansolutions/morpheus/demo/filter/filter-example-exists-manual-join.json";
 
     @Autowired
     private StrategyFilterQueryService strategyFilterQueryService;

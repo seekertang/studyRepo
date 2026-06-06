@@ -1,15 +1,15 @@
-package com.backstopsolutions.morpheus.dto.filter.spec;
+package com.ethansolutions.morpheus.dto.filter.spec;
 
-import com.backstopsolutions.morpheus.demo.filter.entity.MeetingEntity;
-import com.backstopsolutions.morpheus.demo.filter.entity.MeetingTemplateEntity;
-import com.backstopsolutions.morpheus.demo.filter.entity.StrategyEntity;
-import com.backstopsolutions.morpheus.dto.filter.FilterCorrelationDto;
-import com.backstopsolutions.morpheus.dto.filter.FilterLogicType;
-import com.backstopsolutions.morpheus.dto.filter.FilterNodeDto;
-import com.backstopsolutions.morpheus.dto.filter.FilterNodeType;
-import com.backstopsolutions.morpheus.dto.filter.FilterOperator;
-import com.backstopsolutions.morpheus.dto.filter.FilterQueryDto;
-import com.backstopsolutions.morpheus.dto.filter.FilterValueDto;
+import com.ethansolutions.morpheus.demo.filter.entity.MeetingEntity;
+import com.ethansolutions.morpheus.demo.filter.entity.MeetingTemplateEntity;
+import com.ethansolutions.morpheus.demo.filter.entity.StrategyEntity;
+import com.ethansolutions.morpheus.dto.filter.FilterCorrelationDto;
+import com.ethansolutions.morpheus.dto.filter.FilterLogicType;
+import com.ethansolutions.morpheus.dto.filter.FilterNodeDto;
+import com.ethansolutions.morpheus.dto.filter.FilterNodeType;
+import com.ethansolutions.morpheus.dto.filter.FilterOperator;
+import com.ethansolutions.morpheus.dto.filter.FilterQueryDto;
+import com.ethansolutions.morpheus.dto.filter.FilterValueDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

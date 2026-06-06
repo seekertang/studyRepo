@@ -1,4 +1,4 @@
-package com.backstopsolutions.morpheus;
+package com.ethansolutions.morpheus;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
